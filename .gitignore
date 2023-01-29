@@ -1,0 +1,10 @@
+# .gitignore patters for iCE40 icestick
+
+.*
+!.gitignore
+*.history
+*.*~
+hardware.asc
+hardware.bin
+hardware.json
+hardware.out
