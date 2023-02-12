@@ -4,6 +4,7 @@
 !.gitignore
 *.history
 *.*~
+apio.ini
 hardware.asc
 hardware.bin
 hardware.json

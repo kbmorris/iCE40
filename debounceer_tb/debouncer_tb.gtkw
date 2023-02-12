@@ -1,0 +1,27 @@
+[*]
+[*] GTKWave Analyzer v3.3.77 (w)1999-2016 BSI
+[*] Thu Feb 09 17:59:30 2023
+[*]
+[dumpfile] "C:\Users\kevin\FPGA\iCE40\debounceer_tb\debouncer_tb.vcd"
+[dumpfile_mtime] "Thu Feb 09 17:58:29 2023"
+[dumpfile_size] 603261
+[savefile] "C:\Users\kevin\FPGA\iCE40\debounceer_tb\debouncer_tb.gtkw"
+[timestart] 0
+[size] 1858 1057
+[pos] -1 -1
+*-23.000000 9799000 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+[treeopen] debouncer_tb.
+[sst_width] 211
+[signals_width] 126
+[sst_expanded] 1
+[sst_vpaned_height] 315
+@28
+debouncer_tb.debouncer_sut.reset
+debouncer_tb.debouncer_sut.clock_in
+debouncer_tb.debouncer_sut.debounce_clk
+debouncer_tb.debouncer_sut.button_in
+debouncer_tb.debouncer_sut.button_out
+@29
+debouncer_tb.debouncer_sut.state
+[pattern_trace] 1
+[pattern_trace] 0

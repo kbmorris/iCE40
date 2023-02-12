@@ -1,0 +1,36 @@
+[*]
+[*] GTKWave Analyzer v3.3.77 (w)1999-2016 BSI
+[*] Sun Feb 05 19:46:07 2023
+[*]
+[dumpfile] "C:\Users\kevin\FPGA\iCE40\counter_tb\counter_tb.vcd"
+[dumpfile_mtime] "Sun Feb 05 19:33:22 2023"
+[dumpfile_size] 5659
+[savefile] "C:\Users\kevin\FPGA\iCE40\counter_tb\counter_tb.gtkw"
+[timestart] 0
+[size] 1000 600
+[pos] 354 16
+*-17.000000 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+[treeopen] counter_tb.
+[sst_width] 211
+[signals_width] 134
+[sst_expanded] 1
+[sst_vpaned_height] 154
+@28
+counter_tb.clock
+counter_tb.clock_in
+counter_tb.done_dn
+counter_tb.done_up
+counter_tb.enabled_dn
+counter_tb.enabled_up
+@22
+counter_tb.led[7:0]
+@28
+counter_tb.reset
+counter_tb.start
+counter_tb.start_dn
+counter_tb.start_up
+@22
+counter_tb.value_dn[7:0]
+counter_tb.value_up[7:0]
+[pattern_trace] 1
+[pattern_trace] 0
