@@ -8,4 +8,6 @@ apio.ini
 hardware.asc
 hardware.bin
 hardware.json
-hardware.out
+*.out
+*.vcd
+*.gtkw
