@@ -4,8 +4,8 @@ module memory #(
     parameter ADDRESS_SIZE = 4,
     parameter MEMORY_QTY = 16,
     parameter DELAY_SIZE = 1,
-    parameter READ_DELAY = 1,
-    parameter WRITE_DELAY = 1
+    parameter READ_WAIT = 0,
+    parameter WRITE_WAIT = 0
 ) (
     //Inputs
     input clock,
@@ -34,14 +34,14 @@ module memory #(
         if (reset) begin
             init_state <= ON;
             counter <= MEMORY_QTY - 1;
-            w_delay <= WRITE_DELAY;
+            w_delay <= WRITE_WAIT + 1;
         // Initialize memory on init_state
         end else if (init_state) begin
             if (counter==0 & w_delay==0) begin
                 init_state <= OFF;
             end else if (w_delay==0) begin
                 counter <=counter - 1;
-                w_delay <= WRITE_DELAY;
+                w_delay <= WRITE_WAIT;
             end else begin
                 mem[counter] <= WORD_INIT;
                 w_delay <= w_delay - 1;
@@ -80,7 +80,7 @@ module memory #(
             WAIT:
                 if (r_en) begin
                     r_state <= READ;
-                    r_delay <= READ_DELAY;
+                    r_delay <= READ_WAIT;
                     r_rdy <= OFF;
                 end else begin
                     r_rdy <= OFF;
@@ -97,7 +97,7 @@ module memory #(
             WAIT:
                 if (w_en) begin
                     w_state <= WRITE;
-                    w_delay <= WRITE_DELAY;
+                    w_delay <= WRITE_WAIT;
                     w_rdy <= OFF;
                 end
             WRITE:
