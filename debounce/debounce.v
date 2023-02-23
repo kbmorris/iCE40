@@ -3,19 +3,18 @@
 //------------------------------------------------------------------
 
 //-- Template for the top entity
-module debouncer #(
+module debounce #(
     // Parameters
     parameter CLOCK_SIZE = 24,
-    parameter CLOCK_LENGTH = 12000,
     parameter CLOCK_START = 24'd0,
     parameter CLOCK_LIMIT = 24'd5999
 ) (
     // Inputs
     input   reset,
-    input   button_in,
-    input   clock_in,
+    input   in,
+    input   clock,
     // Outputs
-    output  reg button_out
+    output  reg out
 );
 
     // States
@@ -28,7 +27,7 @@ module debouncer #(
     reg debounce_clk;
 
     // Debounce Clock
-    always @ (posedge clock_in or posedge reset) begin
+    always @ (posedge clock or posedge reset) begin
         if (reset) begin
             clock_counter <= CLOCK_START;
             debounce_clk <= 0;
@@ -45,22 +44,22 @@ module debouncer #(
         //Reset to Idle
         if (reset) begin
             state <= OFF;
-            button_out <= OFF;
+            out <= OFF;
         end else begin
             case (state)
                 OFF: begin
                     //Transition to Debounce
-                    if (button_in==ON) begin
+                    if (in==ON) begin
                         state <= ON;
-                        button_out <= ON;
+                        out <= ON;
                     end
                 end
 
                 ON: begin
                     //Transition to Idle
-                    if (button_in==OFF) begin
+                    if (in==OFF) begin
                         state <= OFF;
-                        button_out <= OFF;
+                        out <= OFF;
                     end
                 end
             endcase

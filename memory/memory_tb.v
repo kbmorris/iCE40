@@ -64,6 +64,7 @@ module memory_tb #(
             w_addr <= w_addr + 1;
             w_data <= $urandom_range(0,255);
             write_cycle <= OFF;
+            $display("Write Cycle");
         end else if (w_ready) begin
             w_en <= OFF;
         end
@@ -71,13 +72,10 @@ module memory_tb #(
         if (read_cycle) begin
             r_en <= ON;
             r_addr <= r_addr +1;
-            r_addr <= r_addr +1;
             read_cycle <= OFF;
         end else if (r_ready) begin
             read_out <= r_data;
             r_en <= OFF;
-        // end else begin
-        //     r_en <= OFF;
         end
     end
 

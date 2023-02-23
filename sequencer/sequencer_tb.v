@@ -2,7 +2,7 @@
 
 module sequencer_tb ();
     // Instantiate the clock
-    reg clock = 0;
+    reg clock = 1;
     always begin
         #41
         clock = ~clock;
@@ -32,7 +32,7 @@ module sequencer_tb ();
     localparam ON = 1'b1;
     reg [3:0] r_delay;
 
-    reg slow_clock = 0;
+    reg slow_clock = 1;
     always begin
         #328
         slow_clock <= ~slow_clock;
@@ -41,7 +41,7 @@ module sequencer_tb ();
     always @ (posedge r_en or posedge reset) begin
         if (reset) begin
         end if (r_en) begin
-            r_rdy <= OFF;
+            r_ready <= OFF;
             r_delay <= $urandom_range(1,4);
             r_data <= $urandom_range(1,255);
         end
@@ -52,8 +52,10 @@ module sequencer_tb ();
             if (~(r_delay==0)) begin
                 r_delay <= r_delay - 1;
             end else begin
-                r_rdy <= ON;
+                r_ready <= ON;
             end
+        end else begin
+            r_ready <= ON;
         end
     end
 
@@ -65,7 +67,7 @@ module sequencer_tb ();
     //SUT Signals
     wire r_en;
     reg [WORD_SIZE-1:0] r_data;
-    reg r_rdy;
+    reg r_ready;
     wire [ADDRESS_SIZE - 1:0] r_addr;
     wire [7:0] sequence;
 
@@ -79,7 +81,7 @@ module sequencer_tb ();
         .slow_clock(slow_clock),
         .reset(reset),
         .r_data(r_data),
-        .r_rdy(r_rdy),
+        .r_ready(r_ready),
         //Outputs
         .r_addr(r_addr),
         .r_en(r_en),

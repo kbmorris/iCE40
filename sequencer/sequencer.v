@@ -8,7 +8,7 @@ module sequencer #(
     input slow_clock,
     input [WORD_SIZE - 1:0] r_data,
     input reset,
-    input r_rdy,
+    input r_ready,
 
     //Outputs
     output reg r_en,
@@ -20,9 +20,9 @@ module sequencer #(
 
     always @ (posedge slow_clock or posedge reset) begin
         if (reset) begin
-            r_addr <= 0;
-            r_en <= ON;
-        end else begin
+            r_addr <= -1;
+            r_en <= OFF;
+        end else if (r_ready) begin
             r_addr <= r_addr + 1;
             r_en <= ON;
         end
@@ -32,7 +32,7 @@ module sequencer #(
         if (reset) begin
             sequence <= 0;
         end else begin
-            if (r_en & r_rdy) begin
+            if (r_en & r_ready) begin
                 sequence <= r_data;
                 r_en <= OFF;
             end
