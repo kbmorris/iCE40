@@ -18,19 +18,15 @@ module store #(
     localparam ON = 1'b1;
     localparam OFF = 1'b0;
 
-    always @ (posedge store or posedge reset) begin
+    always @ (posedge clock or posedge reset) begin
         if (reset) begin
             w_addr <= -1;
             w_en <= OFF;
-        end else if (w_ready & ~w_en) begin
+        end else if (store) begin
             w_addr <= w_addr + 1;
             w_data <= sequence;
             w_en <= ON;
-        end
-    end
-
-    always @ (posedge clock) begin
-        if (w_en & w_ready) begin
+        end else if (w_en & w_ready) begin
             w_en <= OFF;
         end
     end

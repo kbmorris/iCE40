@@ -17,20 +17,21 @@ module sequencer #(
 );
     localparam ON = 1'b1;
     localparam OFF = 1'b0;
+    reg init_read = OFF;
 
-    always @ (posedge slow_clock or posedge reset) begin
-        if (reset) begin
-            r_addr <= -1;
-            r_en <= OFF;
-        end else if (r_ready) begin
-            r_addr <= r_addr + 1;
-            r_en <= ON;
-        end
+    always @ (posedge slow_clock) begin
+        init_read <= ON;
     end
 
     always @ (posedge clock or posedge reset) begin
         if (reset) begin
             sequence <= 0;
+            r_addr <= -1;
+            r_en <= OFF;
+        end else if (init_read & r_ready) begin
+            r_addr <= r_addr + 1;
+            r_en <= ON;
+            init_read <= OFF;
         end else begin
             if (r_en & r_ready) begin
                 sequence <= r_data;

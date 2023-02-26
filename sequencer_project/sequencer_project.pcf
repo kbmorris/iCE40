@@ -1,0 +1,8 @@
+set_io -warn-no-port clock 21
+set_io -warn-no-port display[0] 112
+set_io -warn-no-port display[1] 113
+
+set_io -pullup yes Reset 78
+set_io -pullup yes Store 79
+set_io -pullup yes Sequence[0] 80
+set_io -pullup yes Sequence[1] 81
