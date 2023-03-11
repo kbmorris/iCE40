@@ -39,7 +39,7 @@ module memory #(
     reg [WORD_SIZE-1:0] mem [0:MEMORY_QTY-1];
     reg [ADDRESS_SIZE-1:0] counter;
 
-    always @ (posedge clock or posedge reset) begin
+    always @ (negedge clock or posedge reset) begin
         if (reset) begin
             w_state <= INIT;
             r_state <= WAIT;

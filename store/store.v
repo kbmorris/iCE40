@@ -17,17 +17,34 @@ module store #(
 );
     localparam ON = 1'b1;
     localparam OFF = 1'b0;
+    localparam STORING = 1'b1;
+
+    reg store_state = OFF;
 
     always @ (posedge clock or posedge reset) begin
         if (reset) begin
             w_addr <= -1;
             w_en <= OFF;
-        end else if (store) begin
-            w_addr <= w_addr + 1;
-            w_data <= sequence;
-            w_en <= ON;
-        end else if (w_en & w_ready) begin
-            w_en <= OFF;
+            store_state <= OFF;
+        end else begin
+            case (store_state)
+                OFF: begin
+                    if (store & w_ready) begin
+                        store_state <= STORING;
+                        w_addr <= w_addr + 1;
+                        w_data <= sequence;
+                        w_en <= ON;
+                    end
+                end
+                STORING: begin
+                    if (~store) begin
+                        store_state <= OFF;
+                        w_en <= OFF;
+                    end else if (w_ready) begin
+                        w_en <= OFF;
+                    end
+                end
+            endcase
         end
     end
 endmodule

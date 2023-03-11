@@ -34,7 +34,7 @@ module sequencer_tb ();
 
     reg slow_clock = 1;
     always begin
-        #328
+        #410
         slow_clock <= ~slow_clock;
     end
 
@@ -42,7 +42,7 @@ module sequencer_tb ();
         if (reset) begin
         end if (r_en) begin
             r_ready <= OFF;
-            r_delay <= $urandom_range(1,4);
+            r_delay <= $urandom_range(1,3);
             r_data <= $urandom_range(1,255);
         end
     end

@@ -1,7 +1,20 @@
-set_io -warn-no-port clock 21
 set_io -warn-no-port display[0] 112
 set_io -warn-no-port display[1] 113
+set_io -warn-no-port r_addr[0] 116
+set_io -warn-no-port r_addr[1] 117
+set_io -warn-no-port r_addr[2] 118
+set_io -warn-no-port r_addr[3] 119
 
+# ------------ Red leds ------------------------------------------------------
+set_io --warn-no-port store 99
+set_io --warn-no-port sequence[0] 98
+set_io --warn-no-port sequence[1] 97
+set_io --warn-no-port D4 96
+
+# ------------ Green led -----------------------------------------------------
+set_io --warn-no-port reset 95
+
+set_io -warn-no-port clock 21
 set_io -pullup yes Reset 78
 set_io -pullup yes Store 79
 set_io -pullup yes Sequence[0] 80

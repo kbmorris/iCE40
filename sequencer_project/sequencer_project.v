@@ -1,4 +1,8 @@
-module sequencer_project(
+module sequencer_project #(
+    parameter COUNTER_LIMIT = 6000000 - 1,
+    parameter CLOCK_LIMIT = 6000 - 1
+
+) (
     // Inputs
     input clock,
     input Reset,
@@ -6,20 +10,19 @@ module sequencer_project(
     input [WORD_SIZE-1:0] Sequence,
 
     // Outputs
-    output wire [WORD_SIZE-1:0] display
-);
+    output wire [WORD_SIZE-1:0] display,
+    output wire [ADDRESS_SIZE-1:0] r_addr,
+    output wire reset,
+    output wire store,
+    output wire [WORD_SIZE-1:0] sequence
+); 
 
     localparam WORD_SIZE = 2;
     localparam ADDRESS_SIZE = 4;
     localparam MEMORY_QTY = 16;
 
-    wire [WORD_SIZE - 1:0] sequence;
     assign sequence = ~Sequence;
-
-    wire reset;
     assign reset = ~Reset;
-
-    wire store;
     assign store = ~Store;
 
     wire seconds;
@@ -28,13 +31,12 @@ module sequencer_project(
     wire w_en;
     wire [WORD_SIZE - 1:0] w_data;
     wire r_en;
-    wire [ADDRESS_SIZE - 1:0] r_addr;
     wire w_ready;
     wire r_ready;
     wire [WORD_SIZE - 1:0] r_data;
 
     clock_divider #(
-
+        .COUNTER_LIMIT(COUNTER_LIMIT)
     ) second_clock (
         .clock(clock),
         .reset(reset),
@@ -42,6 +44,7 @@ module sequencer_project(
     );
 
     debounce #(
+        .CLOCK_LIMIT(CLOCK_LIMIT)
     ) debounce_store (
         .reset(reset),
         .in(store),
@@ -82,6 +85,7 @@ module sequencer_project(
 
     memory #(
         .WORD_SIZE(WORD_SIZE),
+        .WORD_INIT(2'b10),
         .ADDRESS_SIZE(ADDRESS_SIZE),
         .MEMORY_QTY(MEMORY_QTY)
     ) sequnencer_memory (
